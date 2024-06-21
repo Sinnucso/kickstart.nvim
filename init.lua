@@ -860,5 +860,19 @@ require('lazy').setup({
   },
 })
 
+--execute python code on F9 press:
+--https://stackoverflow.com/questions/18948491/running-python-code-in-vim
+--https://neovim.io/doc/user/lua-guide.html
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  command = "imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>",
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  command = "map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>",
+})
+--autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+--autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
